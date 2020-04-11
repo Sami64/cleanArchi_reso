@@ -32,11 +32,12 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetRandomNumberTrivia(sl()));
 
   // Repository
-  sl.registerLazySingleton<NumberTriviaRepository>(() => NumberTriviaRepositoryImpl(
+  sl.registerLazySingleton<NumberTriviaRepository>(
+    () => NumberTriviaRepositoryImpl(
     localDataSource: sl(),
     networkInfo: sl(),
     remoteDataSource: sl(),
-    )
+    ),
   );
 
   // Data sources
@@ -58,5 +59,5 @@ Future<void> init() async {
   final sharedPreferences =  await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
-  sl.registerLazySingleton(() => DataConnectionChecker);
+  sl.registerLazySingleton(() => DataConnectionChecker());
 }
